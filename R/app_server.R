@@ -336,12 +336,15 @@ app_server <- function(input, output, session) {
       ),
       
       error = function(error) {
+        error_key <- error$message
+        translated_message <- lang[[error_key]]
+        
+        if (is.null(translated_message)) {
+          translated_message <- error$message
+        }
         
         showNotification(
-          paste(
-            "Calculation error:",
-            error$message
-          ),
+          translated_message,
           type = "error"
         )
         

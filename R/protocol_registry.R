@@ -5,7 +5,7 @@ protocol_registry <- list(
       id = "vma",
       label_key = "vma_test",
       type = "vma",
-      hr_mode = "max_hr"
+      hr_mode = "mean_and_max_hr"
     ),
     critical_speed = list(
       id = "critical_speed",
@@ -20,7 +20,7 @@ protocol_registry <- list(
       id = "vma",
       label_key = "vma_test",
       type = "vma",
-      hr_mode = "max_hr"
+      hr_mode = "mean_and_max_hr"
     ),
     vertical_speed = list(
       id = "vertical_speed",
@@ -35,7 +35,7 @@ protocol_registry <- list(
       id = "pma",
       label_key = "pma_test",
       type = "pma",
-      hr_mode = "max_hr"
+      hr_mode = "mean_and_max_hr"
     ),
     critical_power = list(
       id = "critical_power",
@@ -50,7 +50,7 @@ protocol_registry <- list(
       id = "pma",
       label_key = "pma_test",
       type = "pma",
-      hr_mode = "max_hr"
+      hr_mode = "mean_and_max_hr"
     ),
     critical_power = list(
       id = "critical_power",

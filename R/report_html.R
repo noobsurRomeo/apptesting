@@ -69,6 +69,46 @@ build_report_html <- function(
     htmltools::htmlEscape(result$unit),
     "</p>",
     
+    if (!is.null(result$duration)) {
+      paste0(
+        "<p><strong>",
+        htmltools::htmlEscape(lang$duration),
+        ":</strong> ",
+        htmltools::htmlEscape(format_time(result$duration)),
+        "</p>"
+      )
+    } else {
+      ""
+    },
+    
+    if (!is.null(result$mean_hr) && !is.na(result$mean_hr)) {
+      paste0(
+        "<p><strong>",
+        htmltools::htmlEscape(lang$mean_hr),
+        ":</strong> ",
+        result$mean_hr,
+        " ",
+        htmltools::htmlEscape(lang$bpm),
+        "</p>"
+      )
+    } else {
+      ""
+    },
+    
+    if (!is.null(result$max_hr) && !is.na(result$max_hr)) {
+      paste0(
+        "<p><strong>",
+        htmltools::htmlEscape(lang$max_hr),
+        ":</strong> ",
+        result$max_hr,
+        " ",
+        htmltools::htmlEscape(lang$bpm),
+        "</p>"
+      )
+    } else {
+      ""
+    },
+    
     "</body>",
     "</html>"
   )
