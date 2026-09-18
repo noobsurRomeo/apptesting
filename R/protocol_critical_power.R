@@ -20,15 +20,15 @@ calculate_critical_power_protocol <- function(input) {
     parse_mm_ss(input$cp_time_2),
     parse_mm_ss(input$cp_time_3)
   )
-  
+
   if (any(is.na(powers)) || any(is.na(times)) || any(powers <= 0) || any(times <= 0)) {
     stop("invalid_critical_power_data")
   }
-  
+
   validate_heart_rate(input$mean_hr, input$max_hr)
-  
+
   out <- calculate_linear_power(powers, times)
-  
+
   list(
     value = out$value,
     unit = "W",

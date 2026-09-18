@@ -20,15 +20,15 @@ calculate_critical_speed_protocol <- function(input) {
     parse_mm_ss(input$cs_time_2),
     parse_mm_ss(input$cs_time_3)
   )
-  
+
   if (any(is.na(distances)) || any(is.na(times)) || any(distances <= 0) || any(times <= 0)) {
     stop("invalid_critical_speed_data")
   }
-  
+
   validate_heart_rate(input$mean_hr, input$max_hr)
-  
+
   out <- calculate_linear_speed(distances, times)
-  
+
   list(
     value = out$value,
     unit = "km/h",

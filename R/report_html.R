@@ -9,9 +9,9 @@ build_report_html <- function(
     report_status,
     lang
 ) {
-  
+
   protocol_label <- lang[[protocol$label_key]]
-  
+
   status_label <- if (
     report_status == "shared"
   ) {
@@ -19,7 +19,7 @@ build_report_html <- function(
   } else {
     lang$private
   }
-  
+
   paste0(
     "<!DOCTYPE html>",
     "<html>",
@@ -30,45 +30,45 @@ build_report_html <- function(
     "</title>",
     "</head>",
     "<body>",
-    
+
     "<h1>",
     htmltools::htmlEscape(lang$report),
     "</h1>",
-    
+
     "<p><strong>",
     htmltools::htmlEscape(lang$name),
     ":</strong> ",
     htmltools::htmlEscape(athlete_name),
     "</p>",
-    
+
     "<p><strong>",
     htmltools::htmlEscape(lang$email),
     ":</strong> ",
     htmltools::htmlEscape(athlete_email),
     "</p>",
-    
+
     "<p><strong>",
     htmltools::htmlEscape(lang$test_protocol),
     ":</strong> ",
     htmltools::htmlEscape(protocol_label),
     "</p>",
-    
+
     "<p><strong>",
     htmltools::htmlEscape(lang$status),
     ":</strong> ",
     htmltools::htmlEscape(status_label),
     "</p>",
-    
+
     "<h2>",
     htmltools::htmlEscape(lang$result),
     "</h2>",
-    
+
     "<p>",
     round(result$value, 2),
     " ",
     htmltools::htmlEscape(result$unit),
     "</p>",
-    
+
     if (!is.null(result$duration)) {
       paste0(
         "<p><strong>",
@@ -80,7 +80,7 @@ build_report_html <- function(
     } else {
       ""
     },
-    
+
     if (!is.null(result$mean_hr) && !is.na(result$mean_hr)) {
       paste0(
         "<p><strong>",
@@ -94,7 +94,7 @@ build_report_html <- function(
     } else {
       ""
     },
-    
+
     if (!is.null(result$max_hr) && !is.na(result$max_hr)) {
       paste0(
         "<p><strong>",
@@ -108,7 +108,7 @@ build_report_html <- function(
     } else {
       ""
     },
-    
+
     "</body>",
     "</html>"
   )

@@ -11,21 +11,21 @@ pma_ui <- function(lang) {
 
 calculate_pma_protocol <- function(input) {
   duration <- parse_mm_ss(input$pma_time)
-  
+
   if (is.na(duration)) {
     stop("invalid_time")
   }
-  
+
   if (!valid_constant_effort_time(duration)) {
     stop("invalid_constant_effort_time")
   }
-  
+
   if (is.na(input$pma_power) || input$pma_power <= 0) {
     stop("invalid_pma_power")
   }
-  
+
   validate_heart_rate(input$mean_hr, input$max_hr)
-  
+
   list(
     value = calculate_pma(input$pma_power),
     unit = "W",
