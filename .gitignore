@@ -1,0 +1,15 @@
+# Local databases and athlete data
+data/
+*.sqlite
+*.sqlite3
+*.db
+
+# R and RStudio files
+.Rhistory
+.RData
+.Rproj.user/
+
+# Secrets
+.env
+*.key
+*.pem
