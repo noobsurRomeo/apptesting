@@ -11,29 +11,40 @@ format_time <- function(seconds) {
 }
 
 parse_mm_ss <- function(value) {
-  if (is.null(value) || is.na(value)) return(NA_real_)
+  if (is.null(value) || length(value) != 1 || is.na(value)) {
+    return(NA_real_)
+  }
+
+  value <- as.character(value)
+
+  if (!nzchar(value) || !grepl("^[0-9]+:[0-9]{2}$", value)) {
+    return(NA_real_)
+  }
+
   x <- strsplit(value, ":", fixed = TRUE)[[1]]
-  if (length(x) != 2) return(NA_real_)
-  minutes <- suppressWarnings(as.numeric(x[1]))
-  seconds <- suppressWarnings(as.numeric(x[2]))
-  if (is.na(minutes) || is.na(seconds)) return(NA_real_)
-  if (seconds < 0 || seconds > 59) return(NA_real_)
+  minutes <- as.numeric(x[1])
+  seconds <- as.numeric(x[2])
+
+  if (seconds > 59) {
+    return(NA_real_)
+  }
+
   minutes * 60 + seconds
 }
 
 validate_heart_rate <- function(mean_hr, max_hr) {
-  
+
   if (is.na(mean_hr) || mean_hr <= 0) {
-    stop("Invalid mean heart rate")
+    stop("invalid_heart_rate")
   }
-  
+
   if (is.na(max_hr) || max_hr <= 0) {
-    stop("Invalid maximum heart rate")
+    stop("invalid_heart_rate")
   }
-  
+
   if (max_hr < mean_hr) {
-    stop("Maximum heart rate cannot be lower than mean heart rate")
+    stop("invalid_heart_rate")
   }
-  
+
   TRUE
 }

@@ -3,11 +3,11 @@ critical_power_ui <- function(lang) {
     h4(lang$critical_power_test),
     p(lang$critical_power_protocol),
     numericInput("cp_power_1", paste(lang$power, "1", "(", lang$watts, ")"), value = 300, min = 1),
-    textInput("cp_time_1", "Temps 1 (mm:ss)", value = "03:00"),
+    textInput("cp_time_1", paste(lang$time, "1"), value = "03:00"),
     numericInput("cp_power_2", paste(lang$power, "2", "(", lang$watts, ")"), value = 280, min = 1),
-    textInput("cp_time_2", "Temps 2 (mm:ss)", value = "06:00"),
+    textInput("cp_time_2", paste(lang$time, "2"), value = "06:00"),
     numericInput("cp_power_3", paste(lang$power, "3", "(", lang$watts, ")"), value = 250, min = 1),
-    textInput("cp_time_3", "Temps 3 (mm:ss)", value = "12:00"),
+    textInput("cp_time_3", paste(lang$time, "3"), value = "12:00"),
     numericInput("mean_hr", lang$mean_hr, value = NA, min = 40, max = 250),
     numericInput("max_hr", lang$max_hr, value = NA, min = 80, max = 250)
   )
@@ -20,13 +20,15 @@ calculate_critical_power_protocol <- function(input) {
     parse_mm_ss(input$cp_time_2),
     parse_mm_ss(input$cp_time_3)
   )
-  
+
   if (any(is.na(powers)) || any(is.na(times)) || any(powers <= 0) || any(times <= 0)) {
-    stop("Critical power inputs invalid")
+    stop("invalid_critical_power_data")
   }
-  
+
+  validate_heart_rate(input$mean_hr, input$max_hr)
+
   out <- calculate_linear_power(powers, times)
-  
+
   list(
     value = out$value,
     unit = "W",
